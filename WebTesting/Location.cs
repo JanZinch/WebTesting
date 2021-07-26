@@ -31,8 +31,8 @@ namespace WebTesting
 
     public struct LatLong {
 
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
            
     }
 
@@ -43,40 +43,30 @@ namespace WebTesting
 
         public override LatLong Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-
             LatLong result = new LatLong();
-
-            string jsonNotation = reader.GetString();
+            string jsonData = reader.GetString();
             string buf = string.Empty;
 
-            Console.WriteLine("String: " + jsonNotation);
-
-            for (int i = 0; i < jsonNotation.Length; i++)
+            for (int i = 0; i < jsonData.Length; i++)
             {
-
-                if (jsonNotation[i] == ',')
+                if (jsonData[i] == ',')
                 {
-
-                    result.Latitude = Convert.ToDouble(buf, _numberFormat);
+                    result.Latitude = Convert.ToSingle(buf, _numberFormat);
 
                     buf = string.Empty;
 
-                    for (int j = i + 1; j < jsonNotation.Length; j++)
+                    for (int j = i + 1; j < jsonData.Length; j++)
                     {
-
-                        buf += jsonNotation[j];
+                        buf += jsonData[j];
                     }
 
-                    result.Longitude = Convert.ToDouble(buf, _numberFormat);
+                    result.Longitude = Convert.ToSingle(buf, _numberFormat);
 
+                    break;
                 }
 
-                buf += jsonNotation[i];
-
+                buf += jsonData[i];
             }
-
-
-
 
             return result;
         }
