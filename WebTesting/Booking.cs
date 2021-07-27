@@ -4,6 +4,7 @@ using NUnit.Framework;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Opera;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
@@ -13,15 +14,13 @@ namespace WebTesting
 
     [TestFixture]
     class Booking
-    {
-        
+    {        
         private IWebDriver _webDriver = new OperaDriver();
         private WebDriverWait _webDriverWait = null;
         private const string Reference = "https://www.booking.com";
 
         [SetUp]
         public void Initialize() {
-
             
             _webDriver.Navigate().GoToUrl(Reference);
             _webDriver.Manage().Window.Maximize();
@@ -45,13 +44,11 @@ namespace WebTesting
 
             By ticketsHeader = By.XPath("//header[contains(@class,'bui-header bui-header--logo-large bui-u-hidden-print')]//li[2]//a[1]//span[2]");
             _webDriver.FindElement(ticketsHeader).Click();
-
         }
 
         [Test]
         public void AccountAccess()
         {
-
             By personalAccountHeader = By.XPath("//div[@class='bui-avatar bui-avatar--text bui-avatar--accent bui-avatar--outline-accent']//img[@class='bui-avatar__image']");
             By registrationHeader = By.XPath("//header[@class='bui-header bui-header--logo-large bui-u-hidden-print']//div[6]//a[1]//span[1]");
 

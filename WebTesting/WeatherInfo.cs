@@ -16,7 +16,6 @@ namespace WebTesting
         [JsonProperty("min_temp")]
         public float MinTemp { get; set; }
 
-
         [JsonProperty("max_temp")]
         public float MaxTemp { get; set; }
 

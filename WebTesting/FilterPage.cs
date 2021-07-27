@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 
 namespace WebTesting
@@ -63,9 +62,7 @@ namespace WebTesting
             }
 
             return result;
-
         }
-
 
         public FilterPage TypeDate(int duration) {
 
@@ -88,7 +85,6 @@ namespace WebTesting
                 if (days[i].Text == today)
                 {                    
                     leavingDay = i + Week;
-
                     //Console.WriteLine(leavingDay + " / " + (days.Count - 1));
 
                     if (leavingDay > days.Count - 1 || days[leavingDay].Text == string.Empty)
@@ -102,9 +98,7 @@ namespace WebTesting
                     }
 
                     break;
-
                 };
-
             }
 
             int difference = 0;
@@ -178,7 +172,6 @@ namespace WebTesting
             }
         }
 
-
         public FilterPage TypePeople(int adults, int children, int rooms) {
 
             _webDriver.FindElement(PeoplePanelLocator).Click();         
@@ -189,7 +182,6 @@ namespace WebTesting
 
             return this;        
         }
-
 
     }
 }

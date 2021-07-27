@@ -16,7 +16,6 @@ namespace WebTesting
         [JsonPropertyName("woeid")]
         public int Id { get; set; }
 
-
         [JsonPropertyName("latt_long")]
         [JsonConverter(typeof(LatLongConverter))]
         public LatLong LatLongData { get; set; }
@@ -38,7 +37,6 @@ namespace WebTesting
 
     public class LatLongConverter : JsonConverter<LatLong>
     {
-
         private NumberFormatInfo _numberFormat = new NumberFormatInfo() { NumberDecimalSeparator = "." };
 
         public override LatLong Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -52,7 +50,6 @@ namespace WebTesting
                 if (jsonData[i] == ',')
                 {
                     result.Latitude = Convert.ToSingle(buf, _numberFormat);
-
                     buf = string.Empty;
 
                     for (int j = i + 1; j < jsonData.Length; j++)
@@ -61,7 +58,6 @@ namespace WebTesting
                     }
 
                     result.Longitude = Convert.ToSingle(buf, _numberFormat);
-
                     break;
                 }
 

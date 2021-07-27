@@ -3,13 +3,10 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 using Newtonsoft.Json.Linq;
 
 using NUnit.Framework;
-
-
 
 
 namespace WebTesting
@@ -21,20 +18,11 @@ namespace WebTesting
         private HttpClient _httpClient = new HttpClient();
         private const string CurrentCityName = "Minsk";
 
-        [SetUp]
-        public void Initialize()
-        {
-
-
-
-        }
-
         public string GetFormattedDay(int offset)
         {
-            string today = DateTime.Today.AddYears(-offset).ToString("yyyy-MM-dd");                        
+            string today = DateTime.Today.AddYears(-offset).ToString("yyyy-MM-dd");
             return today.Replace('-', '/');
         }
-
 
         [Test]
         public async Task Search()
