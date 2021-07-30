@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 
+
 namespace WebTesting
 {
     [TestFixture]
@@ -27,10 +28,10 @@ namespace WebTesting
         [Test]
         public async Task Search()
         {
-            Location currentCity = new Location();
+            Location currentCity = default;
             WeatherInfo currentDay = new WeatherInfo();
 
-
+            
             HttpResponseMessage response = await _httpClient.GetAsync(Reference + "location/search/?query=min");
             response.EnsureSuccessStatusCode();
             Stream jsonStream = await response.Content.ReadAsStreamAsync();
@@ -47,6 +48,7 @@ namespace WebTesting
                 }
             }
 
+            Assert.AreNotEqual(currentCity, default);
 
             response = await _httpClient.GetAsync(Reference + "location/" + currentCity.Id + "/");
             response.EnsureSuccessStatusCode();
@@ -64,7 +66,7 @@ namespace WebTesting
                 if (!day.CheckTemperature(Season.SUMMER))
                 {
                     throw new ArgumentOutOfRangeException(nameof(day.CurrentTemp), "Incorrect temperature.");
-                }                
+                }
             }
 
             currentDay = days[0];
@@ -89,8 +91,7 @@ namespace WebTesting
                 }                
             }
 
-            if (!coincidence) throw new Exception("Ни одно значение не соответствует сегодняшнему дню.");
-        
+            Assert.That(coincidence, "Ни одно значение не соответствует сегодняшнему дню.");    
         }
 
     }
